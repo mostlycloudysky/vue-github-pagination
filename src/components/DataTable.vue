@@ -3,17 +3,17 @@
     <thead class="table-dark">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Title</th>
+        <th scope="col">Issue Number</th>
+        <th scope="col">User Name</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+      <tr v-for="issue in githubIssues" :key="issue.id">
+        <th scope="row">{{ githubIssues.indexOf(issue) + 1 }}</th>
+        <td>{{ issue.title }}</td>
+        <td>{{ issue.number }}</td>
+        <td>{{ issue.user.login }}</td>
       </tr>
     </tbody>
   </table>
@@ -21,8 +21,15 @@
 
 <script>
 export default {
-  name: "DataTable"
+  name: "DataTable",
+  props: {
+    githubIssues: Array
+  }
 };
 </script>
 
-<style></style>
+<style scoped>
+.avatar {
+  max-width: 20px;
+}
+</style>

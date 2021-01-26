@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <DataTable />
+    <DataTable :githubIssues="githubIssues" />
   </div>
 </template>
 
@@ -16,7 +16,8 @@ export default {
   },
   data() {
     return {
-      githubPage: 1
+      githubPage: 1,
+      githubIssues: []
     };
   },
   mounted() {
@@ -26,8 +27,9 @@ export default {
     fetchData() {
       axios
         .get(GITHUB_API + this.githubPage)
-        .then(({ data }) => {
-          console.log(data);
+        .then(response => {
+          this.githubIssues = response.data;
+          console.log(`Github issues are ${JSON.stringify(this.githubIssues)}`);
         })
         .catch(err => {
           console.log(err);
