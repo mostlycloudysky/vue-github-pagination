@@ -9,8 +9,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="issue in githubIssues" :key="issue.id">
-        <th scope="row">{{ githubIssues.indexOf(issue) + 1 }}</th>
+      <tr v-for="issue in showIssues" :key="issue.id" class="mt-2">
+        <th scope="row">{{ showIssues.indexOf(issue) + 1 }}</th>
         <td>{{ issue.title }}</td>
         <td>{{ issue.number }}</td>
         <td>{{ issue.user.login }}</td>
@@ -23,7 +23,8 @@
 export default {
   name: "DataTable",
   props: {
-    githubIssues: Array
+    githubIssues: Array,
+    showIssues: Array
   }
 };
 </script>
