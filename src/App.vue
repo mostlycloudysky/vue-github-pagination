@@ -1,12 +1,41 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+  <div id="app" class="container">
+    <DataTable />
   </div>
 </template>
+
+<script>
+import DataTable from "./components/DataTable";
+import axios from "axios";
+const GITHUB_API =
+  "https://api.github.com/repos/angular/angular/issues?state=closed&per_page=5&page=";
+export default {
+  name: "app",
+  components: {
+    DataTable
+  },
+  data() {
+    return {
+      githubPage: 1
+    };
+  },
+  mounted() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData() {
+      axios
+        .get(GITHUB_API + this.githubPage)
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
+};
+</script>
 
 <style>
 #app {
